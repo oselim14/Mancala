@@ -1,0 +1,112 @@
+*{
+    box-sizing: border-box;
+}
+header {
+    text-align: center;
+    font-family: 'Poiret One', cursive;
+    font-size: 45px;
+    font-weight: 500;
+}
+h1 {
+    text-align: center;
+    font-family: 'Poiret One', cursive;
+    font-size: 25px;
+}
+
+body {
+    height: 100vh;
+    background:  rgba(53, 171, 201, 0.2);
+}
+.board {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 5px;
+    grid-template-areas: 
+    "s6 p7 p8 p9 p10 p11 p12 s13"
+    "s6 p5 p4 p3 p2 p1 p0 s13";
+    background-color: #BD8547;
+    padding: 10px;
+    border-radius: 12px; 
+
+}
+.pocket {
+    border: 0.25vmin solid black;
+    height: 160px;
+    width: auto;
+    border-radius: 12px;
+    box-shadow: 5px 10px 0px 0px inset rgb(146, 104, 56);
+}
+
+.store {
+    border: 0.25vmin solid black;
+    height: 325px;
+    width: auto;
+    border-radius: 12px;
+    box-shadow: 5px 10px 0px 0px inset rgb(146, 104, 56);
+}
+
+button {
+    background-color: lightgray;
+    color: white;
+    border: 1vmin solid lightgray;
+    border-radius: 12px;
+    margin: 5px; 
+
+}
+button:hover {
+    transform: scale(1.1);
+    transition: all 0.2s ease-in-out;
+    background-color: aqua;
+    color: white;
+    border: 1vmin solid aqua;
+}
+
+#storeL {
+    grid-area: 's6';
+    grid-column: 1;
+    grid-row: 1 / 3;
+}
+
+#storeR {
+    grid-area: 's13';
+    grid-column: 8;
+    grid-row: 1 / 3;
+}
+
+#pocket0 {
+    grid-area: 'p0';
+}
+#pocket1 {
+    grid-area: 'p1';
+}
+#pocket2 {
+    grid-area: 'p2';
+}
+#pocket3 {
+    grid-area: 'p3';
+}
+#pocket4 {
+    grid-area: 'p4';
+}
+#pocket5 {
+    grid-area: 'p5';
+}
+#pocket7 {
+    grid-area: 'p7';
+}
+#pocket8 {
+    grid-area: 'p8';
+}
+#pocket9 {
+    grid-area: 'p9';
+}
+#pocket10 {
+    grid-area: 'p10';
+}
+#pocket11 {
+    grid-area: 'p11';
+}
+#pocket12 {
+    grid-area: 'p12';
+}
