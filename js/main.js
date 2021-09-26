@@ -32,7 +32,6 @@ function init() {
     board = [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0]; //each game starts with 4 in each pocket;
     winner = null;
     turn= 1; //player one starts, bottom of screen
-    playerHand = 0;
     render();
 }
 
@@ -45,32 +44,47 @@ function render(){
 }
 
 function playerTurn(evt){
-    
-    let idx = pocketEls.indexOf(evt, target);
-    if (idx !== null) {
-        playerHand === board[idx];
+    playerHand = 0;
+    let idx = pocketEls.indexOf(evt.target);
+    let numStone = pocketEls[idx];
+    if (idx !== 0) {
+        playerHand = numStone;
         console.log(playerHand);
-    }
-
-    // playerHand = pocketEls[idx];
-    // turn = getTurn();
-    // winner = getWinner();
-    
+    } else {return};
+// if the pockets are all empty, the game is over - get winner. If any pocket has a stone, go to get turn. 
+    if (pocketEls[idx] === 0){
+        getWinner();
+    } else {turn = getTurn();}
 }
 
 
 function renderMsg(){
     if (winner === 1) {
-        msgEl.innerHTML = "Player 1 has won!";
+        msgEl.innerHTML = "Player 1 wins!";
     } else {
-        msgEl.innerHTML = "Player 2 has won!";
+        msgEl.innerHTML = "Player 2 wins!";
     }
 }
 
+function getTurn () {
+    // if the players hand is greater than 1, drop stones in pockets, remove stone from hand
+    //if players hand is 0 and the last pocket is greater than 1, pick up stones and continue again;
+    // if player hand is 0 and last pocket is 0, then turn is over. 
+    board.forEach(function(numStones, idx) {
+       if (playerHand > 1) { pocketEls[idx] = numStones++;
+        playerHand[idx] = numStones--;
+       } else if (playerHand === 0 && (pocketEls[idx]> 1))  {
+           playerHand[idx] = pocketEls[idx];
+       } else if (playerHand === 0 && (pocketEls[idx] <= 1)){
+           turn *= -1;
+       }
+    })
+};
+
 function getWinner() {
-    if (pockets === 0 && p6 > p13) {
+    if (pocketEls === 0 && getElementByID(p6) > getElementByID(p13)) {
         return winner = -1;
-    } else if (pockets === 0 && p13 > p6){
+    } else if (pocketEls === 0 && getElementByID(p13) > getElementByID(p6)){
         return winner = 1;
     }
 }
