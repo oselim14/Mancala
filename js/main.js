@@ -11,7 +11,6 @@ let players = {
 let board; //single array starting in bottom right up to top right
 let turn; //1 or -1, based on getTurn to know when the next turn starts
 let winner; //winner is whoever has more stones at the end of the game(when no stones are left in pockets)
-let playerHand; // when the player picks up stones from a pocket this will fill;
 
 
 /*----- cached element references -----*/
@@ -20,7 +19,7 @@ const btnEl= document.querySelector('button');
 const msgEl = document.querySelector('h1'); 
 
 /*----- event listeners -----*/
-btnEL = addEventListener('click', init);
+btnEl.addEventListener('click', init);
 document.getElementById('board').addEventListener('click', playerTurn);
 /*----- functions -----*/
 // intialize the game
@@ -28,6 +27,7 @@ init();
 
 //initialize all state var then call render;
 function init() {
+    console.log('check');
   //board for the game when starting
     board = [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0]; //each game starts with 4 in each pocket;
     winner = null;
@@ -44,19 +44,14 @@ function render(){
 }
 
 function playerTurn(evt){
-    playerHand = 0;
     let idx = pocketEls.indexOf(evt.target); // if pocket doesn't equal 0, on a click set stone amt to playerhand. If pocket is 0, don't allow a click. 
-    let numStone = board[idx];
-    if (numStone !== 0) {
-        playerHand = numStone; 
-    } else if (numStone === 0) {
-        return;
-    };
-    board[idx]=0;
-    while (playerHand > 0){
-        idx+=1;
+    let numStone = board[idx]; 
+    if (idx === 6 || idx === 13 || numStone === 0) return;
+    board[idx] = 0;
+    while (numStone > 0){
+        idx = findIndex(idx);
         board[idx]++; 
-        playerHand--;
+        numStone--;
     }
     console.log(board);
     render();
@@ -65,20 +60,20 @@ function playerTurn(evt){
     //     getWinner();
     // } else {
 }
-// function findIndex(idx) {{
-// if (idx >= 12) {
-//     return idx += 1;
-// } else if (idx < 12) {
-//     return idx = 0;
-// }} if (player = -1) {
-//     for (let i = 0; i < 13; i++ ){
-//         if (i === 6){continue;}
-//     }
-// } else {
-//     for (let i = 0; i < 13; i++ ){
-//         if (i === 13){continue;}
-//     }
-// }}    
+function findIndex(idx) {
+    idx += 1;
+    idx = idx % 14;
+    if (player = -1) {
+        for (let i = 0; i < 13; i++ ){
+            if (i === 6){continue;}
+        }
+    } else {
+        for (let i = 0; i < 13; i++ ){
+            if (i === 13){continue;}
+        }
+    }
+    playerTurn();
+}    
 
 function renderMsg(){
     if (winner === 1) {
