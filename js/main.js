@@ -38,53 +38,80 @@ function init() {
 function render(){
     // renderBoard(); // edit images in divs to represent mancala stones. 
     renderMsg();
-    board.forEach(function(numStones, idx) {
-        pocketEls[idx].innerHTML = numStones;
+    board.forEach(function(numStone, idx) {
+        pocketEls[idx].innerHTML = numStone;
     });
 }
 
 function playerTurn(evt){
     playerHand = 0;
-    let idx = pocketEls.indexOf(evt.target);
-    let numStone = pocketEls[idx];
-    if (idx !== 0) {
-        playerHand = numStone;
-        console.log(playerHand);
-    } else {return};
-// if the pockets are all empty, the game is over - get winner. If any pocket has a stone, go to get turn. 
-    if (pocketEls[idx] === 0){
-        getWinner();
-    } else {turn = getTurn();}
+    let idx = pocketEls.indexOf(evt.target); // if pocket doesn't equal 0, on a click set stone amt to playerhand. If pocket is 0, don't allow a click. 
+    let numStone = board[idx];
+    if (numStone !== 0) {
+        playerHand = numStone; 
+    } else if (numStone === 0) {
+        return;
+    };
+    board[idx]=0;
+    while (playerHand > 0){
+        idx+=1;
+        board[idx]++; 
+        playerHand--;
+    }
+    console.log(board);
+    render();
+// if the pockets are all empty, the game is over => getWinner. If any pocket has a stone, go to getTurn. 
+    // if (board[idx] === 0){
+    //     getWinner();
+    // } else {
 }
-
+// function findIndex(idx) {{
+// if (idx >= 12) {
+//     return idx += 1;
+// } else if (idx < 12) {
+//     return idx = 0;
+// }} if (player = -1) {
+//     for (let i = 0; i < 13; i++ ){
+//         if (i === 6){continue;}
+//     }
+// } else {
+//     for (let i = 0; i < 13; i++ ){
+//         if (i === 13){continue;}
+//     }
+// }}    
 
 function renderMsg(){
     if (winner === 1) {
         msgEl.innerHTML = "Player 1 wins!";
-    } else {
+    } else if (winner === -1) {
         msgEl.innerHTML = "Player 2 wins!";
     }
 }
 
-function getTurn () {
-    // if the players hand is greater than 1, drop stones in pockets, remove stone from hand
-    //if players hand is 0 and the last pocket is greater than 1, pick up stones and continue again;
-    // if player hand is 0 and last pocket is 0, then turn is over. 
-    board.forEach(function(numStones, idx) {
-       if (playerHand > 1) { pocketEls[idx] = numStones++;
-        playerHand[idx] = numStones--;
-       } else if (playerHand === 0 && (pocketEls[idx]> 1))  {
-           playerHand[idx] = pocketEls[idx];
-       } else if (playerHand === 0 && (pocketEls[idx] <= 1)){
-           turn *= -1;
-       }
-    })
-};
+// if the players hand is greater than 1, drop stones in pockets, remove stone from hand
+//if players hand is 0 and the last pocket is greater than 1, pick up stones and continue again;
+// if player hand is 0 and last pocket is 0, then turn is over. 
+
+    //     while (playerHand <= 1){
+    //         turn *= -1;
+    //     }
+    //    if (playerHand > 1) { pocketEls[idx] = numStones++;
+    //     playerHand[idx] = numStones--;
+    //    } else if (playerHand === 0 && (pocketEls[idx]> 1))  {
+    //        playerHand[idx] = board[idx];
+    //    } else if (playerHand === 0 && (pocketEls[idx] <= 1)){
+    //        turn *= -1;
+    //    }
+    // })
+
 
 function getWinner() {
-    if (pocketEls === 0 && getElementByID(p6) > getElementByID(p13)) {
+    if (board.every(checkPockets) === 0 && getElementByID(p6) > getElementByID(p13)) {
         return winner = -1;
-    } else if (pocketEls === 0 && getElementByID(p13) > getElementByID(p6)){
+    } else if (board.every(checkPockets) === 0 && getElementByID(p13) > getElementByID(p6)){
         return winner = 1;
+    }
+    function checkPockets(stones) {
+        return stones = 0;
     }
 }

@@ -15,25 +15,26 @@ h1 {
 
 body {
     height: 100vh;
-    background:  rgba(53, 171, 201, 0.2);
+    background:  #B7B7A4;
 }
 #board {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 160px 160px;
     gap: 5px;
-    background-color: #BD8547;
+    background-color: #DDBEA9;
     padding: 10px;
     border-radius: 12px; 
+    box-shadow: 5px 10px 0px 0px #CB997E;
     grid-template-areas: 
-    "s6 p12 p11 p10 p9 p8 p7 s13"
-    "s6 p5 p4 p3 p2 p1 p0 s13"
+    "s13 p12 p11 p10 p9 p8 p7 s6"
+    "s13 p5 p4 p3 p2 p1 p0 s6"
 }
 #board > div {
-    border: 0.25vmin solid black;
+    border: 0.25vmin solid #CB997E;
     width: auto;
     border-radius: 12px;
-    box-shadow: 5px 10px 0px 0px inset rgb(146, 104, 56);
+    box-shadow: 5px 10px 0px 0px inset #CB997E;
     display: flex; 
     justify-content: center;   
     align-items: center;
@@ -46,34 +47,34 @@ body {
     height: 325px;
     width: auto;
     border-radius: 12px;
-    box-shadow: 5px 10px 0px 0px inset rgb(146, 104, 56);
+    box-shadow: 5px 10px 0px 0px inset #CB997E;
 }
 
 button {
-    background-color: lightgray;
-    color: white;
-    border: 1vmin solid lightgray;
+    background-color: #6B705C;
+    color: #FFE8D6;
+    border: 1vmin solid #6B705C;
     border-radius: 12px;
-    margin: 5px; 
+    margin: 15px; 
 
 }
 button:hover {
     transform: scale(1.1);
     transition: all 0.2s ease-in-out;
-    background-color: aqua;
-    color: white;
-    border: 1vmin solid aqua;
+    background-color: #FFE8D6;
+    color: #A5A58D;
+    border: 1vmin solid #FFE8D6;
 }
 
 #p6 {
     grid-area: 's6';
-    grid-column: 1;
+    grid-column: 8;
     grid-row: 1 / 3;
 }
 
 #p13 {
     grid-area: 's13';
-    grid-column: 8;
+    grid-column: 1;
     grid-row: 1 / 3;
 }
 
@@ -97,19 +98,31 @@ button:hover {
 }
 #p7 {
     grid-area: 'p7';
+    grid-column: 7;
+    grid-row: 2 / 3;
 }
 #p8 {
     grid-area: 'p8';
+    grid-column: 6;
+    grid-row: 2 / 3;
 }
 #p9 {
     grid-area: 'p9';
+    grid-column: 5;
+    grid-row: 2 / 3;
 }
 #p10 {
     grid-area: 'p10';
+    grid-column: 4;
+    grid-row: 2 / 3;
 }
 #p11 {
     grid-area: 'p11';
+    grid-column: 3;
+    grid-row: 2 / 3;
 }
 #p12 {
     grid-area: 'p12';
+    grid-column: 2;
+    grid-row: 2 / 3;
 }
