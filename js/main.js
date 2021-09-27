@@ -27,7 +27,6 @@ init();
 
 //initialize all state var then call render;
 function init() {
-    console.log('check');
   //board for the game when starting
     board = [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0]; //each game starts with 4 in each pocket;
     winner = null;
@@ -56,23 +55,29 @@ function playerTurn(evt){
     console.log(board);
     render();
 // if the pockets are all empty, the game is over => getWinner. If any pocket has a stone, go to getTurn. 
-    // if (board[idx] === 0){
-    //     getWinner();
-    // } else {
+    if (board[idx] === 0){
+        getWinner();
+    } else if (numStone === 0) { 
+        turn *= -1;
+    }
 }
+
 function findIndex(idx) {
     idx += 1;
     idx = idx % 14;
-    if (player = -1) {
-        for (let i = 0; i < 13; i++ ){
-            if (i === 6){continue;}
+    while (turn = -1){
+        idx++;
+        if (idx === 13){
+            continue;
         }
-    } else {
-        for (let i = 0; i < 13; i++ ){
-            if (i === 13){continue;}
+    } while (turn = 1) {
+        idx++;
+        if (idx === 6){
+            continue;
         }
     }
-    playerTurn();
+    console.log(findIndex(idx))
+    return idx;
 }    
 
 function renderMsg(){
@@ -82,22 +87,6 @@ function renderMsg(){
         msgEl.innerHTML = "Player 2 wins!";
     }
 }
-
-// if the players hand is greater than 1, drop stones in pockets, remove stone from hand
-//if players hand is 0 and the last pocket is greater than 1, pick up stones and continue again;
-// if player hand is 0 and last pocket is 0, then turn is over. 
-
-    //     while (playerHand <= 1){
-    //         turn *= -1;
-    //     }
-    //    if (playerHand > 1) { pocketEls[idx] = numStones++;
-    //     playerHand[idx] = numStones--;
-    //    } else if (playerHand === 0 && (pocketEls[idx]> 1))  {
-    //        playerHand[idx] = board[idx];
-    //    } else if (playerHand === 0 && (pocketEls[idx] <= 1)){
-    //        turn *= -1;
-    //    }
-    // })
 
 
 function getWinner() {
