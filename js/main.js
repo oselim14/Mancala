@@ -49,19 +49,25 @@ function playerTurn(evt){
     while (turn === -1 && (idx === 0 || idx === 1 || idx === 2 || idx === 3 || idx === 4 || idx === 5)) return;
     if (idx === 6 || idx === 13 || numStone === 0) return;
     board[idx] = 0;
-    while (numStone > 0){
+    while (numStone > 1){
         idx = findIndex(idx);
         board[idx]++; 
         numStone--;
     }
+    // while (numStone = 1) {
+    //     idx = findIndex(idx);
+    //     board[idx]++;
+    //     numStone = board[idx];
+    // }
     console.log(board);
     render();
     turn *= -1;
 // if the pockets are all empty, the game is over => getWinner. If any pocket has a stone, go to getTurn. 
-    // if (board[idx] === 0){
-    //     getWinner();
-    // } else if (numStone === 0) { 
-    // }
+    if (document.querySelectorAll('#board > pocket') === 0){
+        getWinner();
+    } else if (numStone === 0) { 
+        turn *= -1;
+    }
 }
 
 function findIndex(idx) {
@@ -96,4 +102,5 @@ function getWinner() {
     function checkPockets(stones) {
         return stones = 0;
     }
+    renderMsg();
 }
