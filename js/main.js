@@ -45,6 +45,8 @@ function render(){
 function playerTurn(evt){
     let idx = pocketEls.indexOf(evt.target); // if pocket doesn't equal 0, on a click set stone amt to playerhand. If pocket is 0, don't allow a click. 
     let numStone = board[idx]; 
+    while (turn === 1 && (idx === 7 || idx === 8 || idx === 9 || idx === 10 || idx === 11 || idx === 12)) return;
+    while (turn === -1 && (idx === 0 || idx === 1 || idx === 2 || idx === 3 || idx === 4 || idx === 5)) return;
     if (idx === 6 || idx === 13 || numStone === 0) return;
     board[idx] = 0;
     while (numStone > 0){
@@ -54,29 +56,25 @@ function playerTurn(evt){
     }
     console.log(board);
     render();
+    turn *= -1;
 // if the pockets are all empty, the game is over => getWinner. If any pocket has a stone, go to getTurn. 
-    if (board[idx] === 0){
-        getWinner();
-    } else if (numStone === 0) { 
-        turn *= -1;
-    }
+    // if (board[idx] === 0){
+    //     getWinner();
+    // } else if (numStone === 0) { 
+    // }
 }
 
 function findIndex(idx) {
     idx += 1;
     idx = idx % 14;
-    while (turn = -1){
-        idx++;
-        if (idx === 13){
-            continue;
-        }
-    } while (turn = 1) {
-        idx++;
-        if (idx === 6){
-            continue;
-        }
+    while (turn === 1 && idx === 6) {
+        (idx += 1);
+        continue;
     }
-    console.log(findIndex(idx))
+    while (turn === -1 && idx === 13) {
+        (idx = 0);
+        continue;
+    }
     return idx;
 }    
 
