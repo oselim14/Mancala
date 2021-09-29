@@ -140,3 +140,14 @@ button:hover {
     grid-column: 2;
     grid-row: 1 / 2;
 }
+h2 {
+    text-align: center;
+    font-family: 'Poiret One', cursive;
+}
+
+h3{
+    text-align: center;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: 150;
+    line-height: 7ch;
+}
