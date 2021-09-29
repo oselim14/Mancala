@@ -23,7 +23,7 @@ const pocketAcross = {
 let board; //single array starting in bottom right up to top right
 let turn; //1 or -1, based on getTurn to know when the next turn starts
 let winner; //winner is whoever has more stones at the end of the game(when no stones are left in pockets)
-
+let capture;
 
 
 /*----- cached element references -----*/
@@ -31,6 +31,7 @@ const pocketEls = Array.from(document.querySelectorAll('#board > div'));
 const btnEl= document.getElementById('replay');
 const btnCompEl= document.getElementById('computer');
 const msgEl = document.querySelector('h1'); 
+const boardEl = document.querySelector('h2');
 
 /*----- event listeners -----*/
 btnEl.addEventListener('click', init);
@@ -47,17 +48,30 @@ function init() {
     board = [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0]; //each game starts with 4 in each pocket;
     winner = null;
     turn= 1; //player one starts, bottom of screen
+    capture = null;
     render();
 }
 
 function render(){
-    // renderBoard(); // edit images in divs to represent mancala stones. 
     renderMsg();
     board.forEach(function(numStone, idx) {
         pocketEls[idx].innerHTML = numStone;
         pocketEls[idx].style.backgroundColor = isIdxInTurn(idx) ? '#fce0cd' : '#DDBEA9';
     });
+    btnEl.style.visibility = winner ? 'visible' : 'hidden';
     btnCompEl.style.visibility = turn === -1 ? 'visible' : 'hidden';
+    document.querySelector('h2').style.visibility = capture === !null ? 'visible' : 'hidden';
+    captured();
+}
+
+function captured(){
+    
+    if (capture === !null){
+        setInterval(function() {
+        document.querySelector('#board').style.cssText = capture === !null ? `background-color: black; transition: background-color .5s ease; box-shadow: 5px 10px 0px 0px black;` : `background-color: #DDBEA9`;
+        document.querySelector('h2').style.visibility = capture === !null ? 'visible' : 'hidden';
+    }, 0);
+    }
 }
 
 function isIdxInTurn(idx) {
@@ -67,6 +81,7 @@ function isIdxInTurn(idx) {
 }
 
 function playerTurn(evt){
+    capture = null;
     let idx = pocketEls.indexOf(evt.target); // if pocket doesn't equal 0, on a click set stone amt to playerhand. If pocket is 0, don't allow a click. 
     let numStone = board[idx]; 
     if (turn === 1 && (idx === 7 || idx === 8 || idx === 9 || idx === 10 || idx === 11 || idx === 12)) return;   // if (turn === -1 && (idx === 7 || idx === 8 || idx === 9 || idx === 10 || idx === 11 || idx === 12)) return;
@@ -83,7 +98,7 @@ function playerTurn(evt){
         board[mancalaIdx] += 1 + board[pocketAcross[idx]];
         board[idx] = 0;
         board[pocketAcross[idx]] = 0;
-        console.log('capture1');
+        capture = true;
     }
     getTurn(idx);
     getWinner();
@@ -106,13 +121,13 @@ function getTurn(idx) {
     } else {turn *= -1};
 }
 
-// function capture(idx) {
-//     if (turn = 1){
-//         console.log('capture');
-//         board[6].value = board[6].value + board[idx];
-//         return;
-//     }
-// }
+function computerPlays() {
+    let randomIdx;
+    while (!board[randomIdx]) {
+        randomIdx = Math.floor(Math.random() * 6) + 7;
+    }
+    pocketEls[randomIdx].click();
+}
 
 function renderMsg(){
     if (winner === 't'){
@@ -139,10 +154,3 @@ function getWinner() {
     } else return;
 }
 
-function computerPlays() {
-    let randomIdx;
-    while (!board[randomIdx]) {
-        randomIdx = Math.floor(Math.random() * 6) + 7;
-    }
-    pocketEls[randomIdx].click();
-}
