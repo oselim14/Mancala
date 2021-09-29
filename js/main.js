@@ -86,8 +86,10 @@ function getTurn(idx) {
 function renderMsg(){
     if (winner === 't'){
         msgEl.innerHTML = `It's a tie!`;
+        msgEl.style.color = `black`;
     } else if (winner) {
         msgEl.innerHTML = `${players[winner]} Wins!`;
+        msgEl.style.color = `black`;
     } else {
         msgEl.innerHTML = `${players[turn]}'s Turn!`;
     }
@@ -95,16 +97,11 @@ function renderMsg(){
 
 
 function getWinner() {
-    if ([0,1,2,3,4,5] === 0 || [7,8,9,10,11,12] === 0 && ([6] > [13])) {
+    if ((board[0] === 0 && board[1] === 0 && board[3] === 0 && board[4] === 0 && board[5] === 0)|| (board[7] === 0 && board[8] === 0 && board[9] === 0 && board[10] === 0 && board[11] === 0 && board[12]=== 0) && (board[6] > board[13])) {
         return winner = 1;
-    } else if ([0,1,2,3,4,5] === 0 || [7,8,9,10,11,12] === 0 && ([13] > [6])){
+    } else if ((board[0] === 0 && board[1] === 0 && board[3] === 0 && board[4] === 0 && board[5] === 0)|| (board[7] === 0 && board[8] === 0 && board[9] === 0 && board[10] === 0 && board[11] === 0 && board[12]=== 0) && (board[13] > board[6])){
         return winner = -1;
-    } else if ([0,1,2,3,4,5] === 0 || [7,8,9,10,11,12] === 0 && ([13] === [6])){
-        return winner === 't';
+    } else if ((board[0] === 0 && board[1] === 0 && board[3] === 0 && board[4] === 0 && board[5] === 0)|| (board[7] === 0 && board[8] === 0 && board[9] === 0 && board[10] === 0 && board[11] === 0 && board[12]=== 0) && (board[6] === board[13])){
+        return winner = 't';
     } else return;
-    // if ((board[0,1,2,3,4,5] === 0 || board[7,8,9,10,11,12] === 0) && (board[13] > board[6])){
-    //     return winner = -1;
-    // } else if ((board[0,1,2,3,4,5]=== 0 || board[7,8,9,10,11,12] === 0) && (board[6] > board[13])){
-    //     return winner = 1;
-    // }
 }
