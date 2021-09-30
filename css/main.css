@@ -1,12 +1,14 @@
 *{
     box-sizing: border-box;
 }
+
 header {
     text-align: center;
     font-family: 'Poiret One', cursive;
     font-size: 60px;
     font-weight: 500;
 }
+
 h1 {
     text-align: center;
     font-family: 'Poiret One', cursive;
@@ -25,6 +27,7 @@ body {
     height: 100vh;
     background:  #B7B7A4;
 }
+
 #board {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -38,6 +41,7 @@ body {
     "s13 p12 p11 p10 p9 p8 p7 s6"
     "s13 p5 p4 p3 p2 p1 p0 s6"
 }
+
 #board > div {
     border: 0.25vmin solid #CB997E;
     width: auto;
@@ -72,6 +76,7 @@ button {
     text-align: center;
     align-items: center;
     justify-content: center;
+    margin-top: 15px;
 }
 
 button:hover {
@@ -103,61 +108,73 @@ button:hover {
     grid-column: 2;
     grid-row: 2 / 3;
 }
+
 #p1 {
     grid-area: 'p1';
     grid-column: 3;
     grid-row: 2 / 3;
 }
+
 #p2 {
     grid-area: 'p2';
     grid-column: 4;
     grid-row: 2 / 3;
 }
+
 #p3 {
     grid-area: 'p3';
     grid-column: 5;
     grid-row: 2 / 3;
 }
+
 #p4 {
     grid-area: 'p4';
     grid-column: 6;
     grid-row: 2 / 3;
 }
+
 #p5 {
     grid-area: 'p5';
     grid-column: 7;
     grid-row: 2 / 3;
 }
+
 #p7 {
     grid-area: 'p7';
     grid-column: 7;
     grid-row: 1 / 2;
 }
+
 #p8 {
     grid-area: 'p8';
     grid-column: 6;
     grid-row: 1 / 2;
 }
+
 #p9 {
     grid-area: 'p9';
     grid-column: 5;
     grid-row: 1 / 2;
 }
+
 #p10 {
     grid-area: 'p10';
     grid-column: 4;
     grid-row: 1 / 2;   
 }
+
 #p11 {
     grid-area: 'p11';
     grid-column: 3;
     grid-row: 1 / 2;
 }
+
 #p12 {
     grid-area: 'p12';
     grid-column: 2;
     grid-row: 1 / 2;
 }
+
 h2 {
     text-align: center;
     font-family: 'Poiret One', cursive;

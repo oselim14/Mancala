@@ -23,7 +23,7 @@ const pocketAcross = {
 let board; //single array starting in bottom right up to top right
 let turn; //1 or -1, based on getTurn to know when the next turn starts
 let winner; //winner is whoever has more stones at the end of the game(when no stones are left in pockets)
-let capture;
+let capture; // if a capture occurs, this will become true causing function captured to run.
 
 
 /*----- cached element references -----*/
@@ -59,17 +59,16 @@ function render(){
         pocketEls[idx].style.backgroundColor = isIdxInTurn(idx) ? '#fce0cd' : '#DDBEA9';
     });
     btnEl.style.visibility = winner ? 'visible' : 'hidden';
-    btnCompEl.style.visibility = turn === -1 ? 'visible' : 'hidden';
-    document.querySelector('h2').style.visibility = capture === !null ? 'visible' : 'hidden';
+    btnCompEl.style.visibility = (turn === -1 && winner === null) ? 'visible' : 'hidden';
+    document.querySelector('h2').style.visibility = capture ? 'visible' : 'hidden';
     captured();
 }
 
 function captured(){
-    
     if (capture === !null){
         setInterval(function() {
-        document.querySelector('#board').style.cssText = capture === !null ? `background-color: black; transition: background-color .5s ease; box-shadow: 5px 10px 0px 0px black;` : `background-color: #DDBEA9`;
-        document.querySelector('h2').style.visibility = capture === !null ? 'visible' : 'hidden';
+            document.querySelector('#board').style.cssText = capture ? `background-color: black; transition: background-color .5s ease; box-shadow: 5px 10px 0px 0px black;` : `background-color: #DDBEA9`;
+            document.querySelector('h2').style.visibility = capture ? 'visible' : 'hidden';
     }, 0);
     }
 }
@@ -84,6 +83,7 @@ function playerTurn(evt){
     capture = null;
     let idx = pocketEls.indexOf(evt.target); // if pocket doesn't equal 0, on a click set stone amt to playerhand. If pocket is 0, don't allow a click. 
     let numStone = board[idx]; 
+    if (winner) return;
     if (turn === 1 && (idx === 7 || idx === 8 || idx === 9 || idx === 10 || idx === 11 || idx === 12)) return;   // if (turn === -1 && (idx === 7 || idx === 8 || idx === 9 || idx === 10 || idx === 11 || idx === 12)) return;
     if (turn === -1 && (idx === 0 || idx === 1 || idx === 2 || idx === 3 || idx === 4 || idx === 5)) return;
     if (idx === 6 || idx === 13 || numStone === 0) return;
