@@ -93,7 +93,7 @@ function playerTurn(evt){
         board[idx]++; 
         numStone--;
     }
-    if (board[idx] === 1 && isIdxInTurn(idx)){
+    if (board[idx] === 1 && isIdxInTurn(idx) && board[pocketAcross[idx]] !== 0){
         const mancalaIdx = turn === -1 ? 13 : 6;
         board[mancalaIdx] += 1 + board[pocketAcross[idx]];
         board[idx] = 0;
@@ -149,7 +149,7 @@ function getWinner() {
         return winner = 1;
     } else if (board[13] > 24){
         return winner = -1;
-    } else if ((board[0] === 0 && board[1] === 0 && board[3] === 0 && board[4] === 0 && board[5] === 0)|| (board[7] === 0 && board[8] === 0 && board[9] === 0 && board[10] === 0 && board[11] === 0 && board[12]=== 0) && (board[6] === board[13])){
+    } else if ((board[0] === 0 && board[1] === 0 && board[3] === 0 && board[4] === 0 && board[5] === 0) || (board[7] === 0 && board[8] === 0 && board[9] === 0 && board[10] === 0 && board[11] === 0 && board[12]=== 0) && (board[6] === board[13]) && board[6] === board[13]){
         return winner = 't';
     } else return;
 }
