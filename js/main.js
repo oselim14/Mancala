@@ -116,7 +116,7 @@ function getNextIdx(idx) {
 function getTurn(idx) {
     if ((turn === -1 && idx === 13) || (turn === 1 && idx === 6)){
         turn *= 1;
-    } else if ((board[0] === 0 && board[1] === 0 && board[3] === 0 && board[4] === 0 && board[5] === 0)|| (board[7] === 0 && board[8] === 0 && board[9] === 0 && board[10] === 0 && board[11] === 0 && board[12]=== 0) && (board[6] > board[13])){
+    } else if ((board[0] === 0 && board[1] === 0 && board[3] === 0 && board[4] === 0 && board[5] === 0)|| (board[7] === 0 && board[8] === 0 && board[9] === 0 && board[10] === 0 && board[11] === 0 && board[12]=== 0)){
         turn *= -1;
     } else {turn *= -1};
 }
