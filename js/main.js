@@ -3,6 +3,7 @@ const players = {
     '-1': 'Computer',
     '1': 'Player',
 };
+
 const pocketAcross = {
     '0': 12,
     '1': 11,
@@ -30,21 +31,20 @@ let capture; // if a capture occurs, this will become true causing function capt
 const pocketEls = Array.from(document.querySelectorAll('#board > div'));
 const btnEl= document.getElementById('replay');
 const btnCompEl= document.getElementById('computer');
-const msgEl = document.querySelector('h1'); 
+const msgEl = document.querySelector('h1 > span'); 
 const boardEl = document.querySelector('h2');
+
 
 /*----- event listeners -----*/
 btnEl.addEventListener('click', init);
 btnCompEl.addEventListener('click', computerPlays);
 document.getElementById('board').addEventListener('click', playerTurn);
 
-/*----- functions -----*/
-// intialize the game
-init();
 
-//initialize all state var then call render;
-function init() {
-  //board for the game when starting
+/*----- functions -----*/
+init();// intialize the game
+
+function init() { //initialize all state var then call render;
     board = [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0]; //each game starts with 4 in each pocket;
     winner = null;
     turn= 1; //player one starts, bottom of screen
@@ -64,8 +64,8 @@ function render(){
     captured();
 }
 
-function captured(){
-    if (capture === !null){
+function captured() {
+    if (capture === !null) {
         setInterval(function() {
             document.querySelector('#board').style.cssText = capture ? `background-color: black; transition: background-color .5s ease; box-shadow: 5px 10px 0px 0px black;` : `background-color: #DDBEA9`;
             document.querySelector('h2').style.visibility = capture ? 'visible' : 'hidden';
@@ -79,7 +79,7 @@ function isIdxInTurn(idx) {
     return false;
 }
 
-function playerTurn(evt){
+function playerTurn(evt) {
     capture = null;
     let idx = pocketEls.indexOf(evt.target); // if pocket doesn't equal 0, on a click set stone amt to playerhand. If pocket is 0, don't allow a click. 
     let numStone = board[idx]; 
@@ -129,25 +129,27 @@ function computerPlays() {
     pocketEls[randomIdx].click();
 }
 
-function renderMsg(){
-    if (winner === 't'){
+function renderMsg() {
+    if (winner === 't') {
         msgEl.innerHTML = `It's a tie!`;
         msgEl.style.color = `black`;
     } else if (winner) {
         msgEl.innerHTML = `${players[winner]} Wins!`;
-        msgEl.style.color = `black`;
-        msgEl.style.fontSize = '35px';
+        msgEl.style.color = `#fce0cd`;
+        msgEl.style.fontSize = '25px';
+        msgEl.style.backgroundColor = 'black'
     } else {
         msgEl.innerHTML = `${players[turn]}'s Turn!`;
         msgEl.style.color = `#6B705C`;
-        msgEl.style.fontSize = '26px';
+        msgEl.style.fontSize = '25px';
+        msgEl.style.backgroundColor = '#B7B7A4'
     }
 }
 
 function getWinner() {
     if (board[6] > 24) {
         return winner = 1;
-    } else if (board[13] > 24){
+    } else if (board[13] > 24) {
         return winner = -1;
     } else if ((board[0] === 0 && board[1] === 0 && board[3] === 0 && board[4] === 0 && board[5] === 0) || (board[7] === 0 && board[8] === 0 && board[9] === 0 && board[10] === 0 && board[11] === 0 && board[12]=== 0) && (board[6] === board[13]) && board[6] === board[13]){
         return winner = 't';
